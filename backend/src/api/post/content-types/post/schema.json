@@ -4,7 +4,7 @@
   "info": {
     "singularName": "post",
     "pluralName": "posts",
-    "displayName": "post",
+    "displayName": "Blogpost",
     "description": ""
   },
   "options": {
@@ -30,25 +30,38 @@
       "target": "plugin::users-permissions.user"
     },
     "Image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "post": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::post.post"
     },
-    "comments": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::comment.comment",
-      "mappedBy": "post"
+    "Published": {
+      "type": "datetime"
+    },
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        " Backhoe",
+        " Excavator",
+        " Bulldozer",
+        " Loader",
+        "  Grader",
+        "  Crane",
+        " Dump Truck",
+        "  Road Roller",
+        " Trencher",
+        " Skid Steer Loader"
+      ]
     }
   }
 }

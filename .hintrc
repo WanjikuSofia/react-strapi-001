@@ -3,6 +3,9 @@
     "development"
   ],
   "hints": {
-    "disown-opener": "off"
+    "disown-opener": "off",
+    "typescript-config/strict": "off",
+    "typescript-config/is-valid": "off",
+    "no-inline-styles": "off"
   }
 }

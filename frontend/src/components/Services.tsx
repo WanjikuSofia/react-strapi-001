@@ -1,24 +1,39 @@
+
+import "../index.css";
+
+const services = [
+  {
+    id: 1,
+    title: "Excavators",
+    description: "High-performance excavators for all construction needs.",
+    image: "src/image/excavator.jpg",
+  },
+  {
+    id: 2,
+    title: "Cranes",
+    description: "Reliable cranes for heavy lifting and high-rise construction.",
+    image: "src/image/crane.jpg",
+  },
+  {
+    id: 3,
+    title: "Bulldozers",
+    description: "Strong and durable bulldozers for land clearing.",
+    image: "src/image/bulldozer.jpg",
+  },
+];
+
 const Services = () => {
-    return (
-      <section className="services" id="services">
-        <h2>Our Services</h2>
-        <div className="service-grid">
-          <div className="service-item">
-            <h3>Excavation</h3>
-            <p>Expert excavation services using high-quality excavators.</p>
-          </div>
-          <div className="service-item">
-            <h3>Road Construction</h3>
-            <p>Grading, compacting, and paving with precision machinery.</p>
-          </div>
-          <div className="service-item">
-            <h3>Heavy Lifting</h3>
-            <p>Cranes and lifters for large-scale construction needs.</p>
-          </div>
+  return (
+    <div className="services-container">
+      {services.map((service) => (
+        <div key={service.id} className="service-card">
+          <img src={service.image} alt={service.title} className="service-image" />
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
         </div>
-      </section>
-    );
-  };
-  
-  export default Services;
-  
+      ))}
+    </div>
+  );
+};
+
+export default Services;

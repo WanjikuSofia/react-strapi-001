@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion"; // Import motion
 import { fetchPosts } from "../services/apis/fetchposts";
-import "../index.css"; // Import the CSS file
+import "../index.css";   
 
 interface Post {
   id: number;

@@ -1,4 +1,6 @@
 import Services from "../components/Services";
+import "../index.css";
+
 
 const ServicesPage = () => {
   return (

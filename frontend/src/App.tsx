@@ -3,8 +3,10 @@ import Layout from "./components/Layout";
 import Posts from "./components/posts";
 import About from "./pages/About";
 import Home from "./pages/Home";
-import Services from "./components/Services";
+import Testimonials from "./components/Testimonials";
 import "./index.css";
+import Contact from "./pages/Contact";
+import ServicesPage from "./pages/Servicespage";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
          <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/services" element={<ServicesPage/>} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/testimonials" element={<Testimonials />} />
         </Routes>
       </Layout>
     </Router>

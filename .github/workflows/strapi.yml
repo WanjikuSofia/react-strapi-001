@@ -1,0 +1,46 @@
+name: Deploy Strapi & React App
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name:  Checkout Repository
+        uses: actions/checkout@v3
+
+      - name:  Set up SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name:  Deploy to Server
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd C:/Users/KONZA-VDI/react-strapi-001  # Your actual project path
+
+            echo " Pulling latest changes..."
+            git pull origin main
+
+            echo " Installing backend dependencies..."
+            cd backend
+            npm ci
+            npm run build  # Build Strapi
+            npm run develop &  # Start Strapi in the background
+            cd ..
+
+            echo " Installing frontend dependencies..."
+            cd frontend
+            npm ci
+            npm run build  # Build React app
+            npx serve -s build &  # Start frontend server in the background
+            cd ..
+
+            echo "Deployment complete!"
+          EOF

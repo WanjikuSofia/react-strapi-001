@@ -3,7 +3,7 @@ name: Deploy Strapi & React App
 on:
   push:
     branches:
-      - main 
+      - strapi-project
 
 jobs:
   deploy:
@@ -23,23 +23,22 @@ jobs:
       - name:  Deploy to Server
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd C:/Users/KONZA-VDI/react-strapi-001  # Your actual project path
-
+            cd C:/Users/KONZA-VDI/react-strapi-001  
             echo " Pulling latest changes..."
-            git pull origin main
+            git pull origin strapi-project
 
             echo " Installing backend dependencies..."
             cd backend
             npm ci
             npm run build  # Build Strapi
-            npm run develop &  # Start Strapi in the background
+            npm run develop &  
             cd ..
 
             echo " Installing frontend dependencies..."
             cd frontend
             npm ci
-            npm run build  # Build React app
-            npx serve -s build &  # Start frontend server in the background
+            npm run build 
+            npx serve -s build &  
             cd ..
 
             echo "Deployment complete!"

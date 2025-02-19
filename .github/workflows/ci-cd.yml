@@ -1,0 +1,55 @@
+name: CI/CD for Strapi Project (Build Only)
+
+on:
+  push:
+    branches:
+      - main
+      - strapi-project
+  pull_request:
+    branches:
+      - main
+      - strapi-project
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: strapi
+          POSTGRES_USER: strapi
+          POSTGRES_PASSWORD: strapi
+        options: >-
+          --health-cmd "pg_isready -U strapi"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install backend dependencies
+      working-directory: backend
+      run: npm install
+
+    - name: Build backend (Strapi)
+      working-directory: backend
+      run: npm run build
+
+    - name: Install frontend dependencies
+      working-directory: frontend
+      run: npm install
+
+    - name: Build frontend
+      working-directory: frontend
+      run: npm run build
